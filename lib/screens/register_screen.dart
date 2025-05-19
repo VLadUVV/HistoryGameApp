@@ -8,14 +8,18 @@ class RegisterScreen extends StatefulWidget{
 }
 
 class _RegisterScreenState extends State<RegisterScreen>{
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+
   Future<void> register() async {
     final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('Id', DateTime.now().microsecondsSinceEpoch);
+    await prefs.setString('name', nameController.text);
     await prefs.setString('email', emailController.text);
     await prefs.setString('password', passwordController.text);
-    Navigator.pop(context);
+    Navigator.pushReplacementNamed(context, '/profile');
 }
   @override
   Widget build(BuildContext context){
@@ -39,12 +43,18 @@ class _RegisterScreenState extends State<RegisterScreen>{
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TextField(
+            controller: nameController,
+            decoration: InputDecoration(labelText: 'Имя пользователя'),
+          ),
+          TextField(
             controller: emailController,
             decoration: InputDecoration(labelText: 'Email'),
+            keyboardType: TextInputType.emailAddress,
           ),
           SizedBox(height: 12),
           TextField(
             controller: passwordController,
+            obscureText: true,
             decoration: InputDecoration(labelText: 'Пароль'),
           ),
           SizedBox(height: 24),

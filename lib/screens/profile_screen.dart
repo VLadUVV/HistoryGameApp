@@ -14,16 +14,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    loadUser();
+    _loadUser();
   }
 
-  Future<void> loadUser() async {
+  Future<void> _loadUser() async {
     final prefs = await SharedPreferences.getInstance();
+    final Id = prefs.getInt('Id');
+    final name = prefs.getString('name');
     final email = prefs.getString('email');
     final password = prefs.getString('password');
-    if (email != null && password != null) {
+    if (Id != null && name != null && email != null && password != null) {
       setState(() {
-        currentUser = User(email: email, password: password);
+        currentUser = User(Id: Id, name: name,email: email, password: password);
       });
     }
   }
@@ -102,14 +104,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         SizedBox(height: 16),
         Text(
-          'Vladislav',
+          currentUser!.name,
           style: TextStyle(
               fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
         ),
         SizedBox(height: 8),
         Text(
-            user.email,
-            style: TextStyle(fontSize: 16, color: Colors.black)
+            currentUser!.email
         ),
         SizedBox(height: 32),
         ElevatedButton(
