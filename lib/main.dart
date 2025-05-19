@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/MainScreen.dart';
-import 'package:flutter_app/screens/SplashScreen.dart';
+import 'package:flutter_app/screens/main_screen.dart';
+import 'package:flutter_app/screens/splash_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,6 +21,9 @@ class MyApp extends StatelessWidget {
         // '/game_10_differences' : (context) => Game10Differences(),
         // '/quiz' : (context) => QuizScreen(),
         // '/emoji_guess' : (context) => EmojiGuessScreen(),
+        // '/login': (context) => LoginScreen(),
+        // '/register': (context) => RegisterScreen(),
+        // '/edit_profile': (context) => EditProfileScreen(),
       },
     );
   }
