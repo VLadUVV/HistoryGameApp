@@ -14,24 +14,14 @@ class _LoginScreenState extends State<LoginScreen>{
 
   Future<void> login() async {
     final prefs = await SharedPreferences.getInstance();
-    final savedEmail = prefs.getString('email');
-    final savedPassword = prefs.getString('password');
+    final storedEmail = prefs.getString('email');
+    final storedPassword = prefs.getString('password');
 
-    if(emailController.text == savedEmail && passwordController.text == savedPassword) {
-      Navigator.pop(context);
+    if(emailController.text == storedEmail && passwordController.text == storedPassword) {
+      Navigator.pushReplacementNamed(context, '/profile');
     } else {
-      showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          title: Text('Ошибка'),
-          content: Text('Неверный email или пароль'),
-          actions: [
-            TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text('ОК'),
-            ),
-          ],
-        ),
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Неверный email или пароль')),
       );
     }
   }
@@ -59,6 +49,7 @@ class _LoginScreenState extends State<LoginScreen>{
           TextField(
             controller: emailController,
             decoration: InputDecoration(labelText: 'Email'),
+            keyboardType: TextInputType.emailAddress,
           ),
           SizedBox(height: 12),
           TextField(
@@ -70,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen>{
           ElevatedButton(
             onPressed: login,
             style: buttonStyle(),
-            child: Text('Зарегистрироваться'),
+            child: Text('Войти'),
           ),
         ],
       ),

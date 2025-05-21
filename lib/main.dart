@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/main_screen.dart';
-import 'package:flutter_app/screens/splash_screen.dart';
+import 'screens/main_screen.dart';
+import 'screens/profile_screen.dart';
+import 'screens/login_screen.dart';
+import 'screens/register_screen.dart';
+import 'screens/edit_profile_screen.dart';
+import 'screens/splash_screen.dart';
+import 'screens/game_selector_screen.dart';
+import 'screens/continue_screen.dart';
+import 'screens/game_10_differences.dart';
+import 'screens/quiz_screen.dart';
+import 'screens/emoji_guess_screen.dart';
+import 'screens/era_selection_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,15 +25,17 @@ class MyApp extends StatelessWidget {
       home: SplashScreen(),
       routes: {
         '/main' : (context) => MainScreen(),
-        // '/profile' : (context) => ProfileScreen(),
-        // '/continue' : (context) => ContinueScreen(),
-        // '/game_selector' : (context) => GameSelector(),
-        // '/game_10_differences' : (context) => Game10Differences(),
-        // '/quiz' : (context) => QuizScreen(),
-        // '/emoji_guess' : (context) => EmojiGuessScreen(),
-        // '/login': (context) => LoginScreen(),
-        // '/register': (context) => RegisterScreen(),
-        // '/edit_profile': (context) => EditProfileScreen(),
+        '/profile' : (context) => ProfileScreen(),
+        '/login': (context) => LoginScreen(),
+        '/register': (context) => RegisterScreen(),
+        '/edit': (context) => EditProfileScreen(),
+        '/continue' : (context) => ContinueScreen(),
+        '/game_selector' : (context) => GameSelectorScreen(),
+        '/game_10_differences' : (context) => Game10Differences(),
+        '/quiz' : (context) => QuizScreen(),
+        '/emoji_guess' : (context) => EmojiGuessScreen(),
+        '/select_era': (context) => EraSelectionScreen(),
+
       },
     );
   }

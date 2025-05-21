@@ -44,7 +44,7 @@ class MainScreen extends StatelessWidget {
                           children: [
                             Image.asset(
                               'assets/images/logo_profile.jpg',
-                              width: 100,
+                              width: 80,
                               height: 24,
                             ),
                             Text('Профиль'),
@@ -61,7 +61,7 @@ class MainScreen extends StatelessWidget {
                     child: SizedBox(
                       width: screenWidth * 0.6,
                       child: ElevatedButton(
-                        onPressed: () => Navigator.pushNamed(context, '/game_selector'),
+                        onPressed: () => Navigator.pushNamed(context, '/select_era'),
                         style: buttonStyle().copyWith(
                           minimumSize: WidgetStateProperty.all(Size.fromHeight(50)),
                         ),
@@ -71,7 +71,7 @@ class MainScreen extends StatelessWidget {
                           children: [
                             Image.asset(
                               'assets/images/play.jpg',
-                              width: 100,
+                              width: 80,
                               height: 24,
                             ),
                             Text('Новая игра'),
@@ -88,7 +88,7 @@ class MainScreen extends StatelessWidget {
                     child: SizedBox(
                       width: screenWidth * 0.6,
                       child: ElevatedButton(
-                        onPressed: () => Navigator.pushNamed(context, '/game_selector'),
+                        onPressed: () => Navigator.pushNamed(context, '/select_era'),
                         style: buttonStyle().copyWith(
                           minimumSize: WidgetStateProperty.all(Size.fromHeight(50)),
                         ),
@@ -98,7 +98,7 @@ class MainScreen extends StatelessWidget {
                           children: [
                             Image.asset(
                               'assets/images/cont.jpg',
-                              width: 100,
+                              width: 80,
                               height: 24,
                             ),
                             Text('Продолжить'),
