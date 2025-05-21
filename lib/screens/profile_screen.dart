@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/button_style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../user_data.dart';
+import '../models/user_data.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override

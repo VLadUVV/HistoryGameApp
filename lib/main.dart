@@ -10,7 +10,7 @@ import 'screens/continue_screen.dart';
 import 'screens/game_10_differences.dart';
 import 'screens/quiz_screen.dart';
 import 'screens/emoji_guess_screen.dart';
-
+import 'screens/era_selection_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
         '/game_10_differences' : (context) => Game10Differences(),
         '/quiz' : (context) => QuizScreen(),
         '/emoji_guess' : (context) => EmojiGuessScreen(),
+        '/select_era': (context) => EraSelectionScreen(),
 
       },
     );
