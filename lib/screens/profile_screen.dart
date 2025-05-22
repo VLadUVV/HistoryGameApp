@@ -98,10 +98,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        CircleAvatar(
-          radius: 50,
-          backgroundImage: AssetImage('assets/images/logo_profile.jpg'),
-        ),
+        Stack(
+        alignment: Alignment.topRight,
+        children: [
+          CircleAvatar(
+            radius: 100,
+            backgroundImage: AssetImage('assets/images/logo_profile.jpg'),
+          ),
+          Positioned(
+            top: 2,
+            right: 2,
+            child: IconButton(
+              icon: Icon(Icons.edit, color: Colors.black87),
+              tooltip: 'Редактировать профиль',
+              onPressed: () {
+                Navigator.pushNamed(context, '/edit');
+              },
+            ),
+          ),
+      ],
+    ),
+        
         SizedBox(height: 16),
         Text(
           currentUser!.name,

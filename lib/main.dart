@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         '/game_selector' : (context) => GameSelectorScreen(),
         '/game_10_differences' : (context) => Game10Differences(),
         '/quiz' : (context) => QuizScreen(),
-        '/emoji_guess' : (context) => EmojiGuessScreen(),
+        // '/emoji_guess' : (context) => EmojiGuessScreen(),
         '/select_era': (context) => EraSelectionScreen(),
 
       },
