@@ -16,7 +16,7 @@ class _QuizScreenState extends State<QuizScreen> {
   int currentIndex = 0;
   int score = 0;
   int bestScore = 0;
-  int timer = 10;
+  int timer = 60;
   Timer? countdown;
   bool answered = false;
   int? selectedAnswer;
@@ -66,7 +66,7 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
     void _startTimer() {
-      timer = 10;
+      timer = 60;
       countdown?.cancel();
       countdown = Timer.periodic(Duration(seconds: 1),(t){
         setState(() {
@@ -137,9 +137,23 @@ class _QuizScreenState extends State<QuizScreen> {
         ),
     );
   }
+  String getSecondLabel(int number) {
+    final n = number % 100;
+    if (n >= 11 && n <= 14) return 'секунд';
+    switch (n % 10) {
+      case 1:
+        return 'секунда';
+      case 2:
+      case 3:
+      case 4:
+        return 'секунды';
+      default:
+        return 'секунд';
+    }
+  }
 
   @override
-  void disponce() {
+  void dispose() {
     countdown?.cancel();
     player.dispose();
     super.dispose();
@@ -178,7 +192,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       style: TextStyle(fontSize: 18, fontWeight:  FontWeight.bold),
                   ),
                   SizedBox(height: 8),
-                  Text('Время $timer секунд', style: TextStyle(color: Colors.red)),
+                  Text('Время: $timer ${getSecondLabel(timer)}', style: TextStyle(color: Colors.red, fontSize: 18)),
                   SizedBox(height: 20),
                   Text(question.question, style: TextStyle(fontSize: 20)),
                   SizedBox(height: 24),
