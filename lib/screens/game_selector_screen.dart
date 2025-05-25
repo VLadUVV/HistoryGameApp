@@ -34,61 +34,37 @@ class GameSelectorScreen extends StatelessWidget{
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Opacity(
-                    opacity: 0.5,
-                    child: SizedBox(
-                      width: screenWidth * 0.6,
-                      child: ElevatedButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(
-                                context, '/game_10_differences'),
-                        child: Text('10 отличий'),
-                        style: buttonStyle().copyWith(
-                          minimumSize: WidgetStateProperty.all(Size.fromHeight(
-                              50)),
-                        ),
-                      ),
-                    ),
-                  ),
-
+                  _buildGameButton(context, screenWidth, '10 отличий', 'game_10_differences'),
                   SizedBox(height: 16),
-
-                  Opacity(
-                    opacity: 0.5,
-                    child: SizedBox(
-                      width: screenWidth * 0.6,
-                      child: ElevatedButton(
-                        onPressed: () => Navigator.pushNamed(context, '/quiz'),
-                        child: Text('Квиз'),
-                        style: buttonStyle().copyWith(
-                          minimumSize: WidgetStateProperty.all(Size.fromHeight(
-                              50)),
-                        ),
-                      ),
-                    ),
-                  ),
+                  _buildGameButton(context, screenWidth, 'Quiz', 'quiz'),
                   SizedBox(height: 16),
-                  Opacity(
-                    opacity: 0.5,
-                    child: SizedBox(
-                      width: screenWidth * 0.6,
-                      child: ElevatedButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, '/emoji_guess'),
-                        child: Text('Угадай события'),
-                        style: buttonStyle().copyWith(
-                          minimumSize: WidgetStateProperty.all(Size.fromHeight(
-                              50)),
-                        ),
-                      ),
-                    ),
-                  ),
+                  _buildGameButton(context, screenWidth, 'Угадай событие', 'emoji_guess'),
+                  SizedBox(height: 16),
                 ],
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+  Widget _buildGameButton(BuildContext context, double width, String title, String gameRoute) {
+    return Opacity(
+        opacity: 0.5,
+        child: SizedBox(
+          width: width * 0.6,
+          child: ElevatedButton(
+              onPressed: () => Navigator.pushNamed(
+                  context,
+                  '/select_era',
+                  arguments: {'game' : gameRoute},
+              ),
+            child: Text(title),
+            style: buttonStyle().copyWith(
+              minimumSize: WidgetStateProperty.all(Size.fromHeight(50)),
+            ),
+          ),
+        ),
     );
   }
 }

@@ -29,14 +29,40 @@ class _EditProfileScreenState extends State<EditProfileScreen>{
   }
   Future<void> _saveChanges() async {
     final prefs = await SharedPreferences.getInstance();
+
+    final name = nameController.text.trim();
+    final email = emailController.text.trim();
+    final password = passwordController.text;
+
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+
+    if (name.isEmpty || email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Пожалуйста, заполните все поля'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+    if (!emailRegex.hasMatch(email)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Введите корректный email'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
     if (userId != null) {
       await prefs.setInt('Id', userId!);
-      await prefs.setString('name', nameController.text);
-      await prefs.setString('email', emailController.text);
-      await prefs.setString('password', passwordController.text);
+      await prefs.setString('name', name);
+      await prefs.setString('email', email);
+      await prefs.setString('password', password);
     }
     Navigator.pop(context);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
