@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/button_style.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainScreen extends StatelessWidget {
   @override
@@ -61,10 +64,51 @@ class MainScreen extends StatelessWidget {
                     child: SizedBox(
                       width: screenWidth * 0.6,
                       child: ElevatedButton(
-                        onPressed: () => Navigator.pushNamed(context, '/game_selector'),
-                        style: buttonStyle().copyWith(
-                          minimumSize: WidgetStateProperty.all(Size.fromHeight(50)),
-                        ),
+                        onPressed: () async {
+                          final prefs = await SharedPreferences.getInstance();
+                          final savedGame = prefs.getString('saved_game_data');
+
+                          if(savedGame != null) {
+                            final saved  = jsonDecode(savedGame);
+                            showDialog(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                  title: Text('Найдена сохранённая игра'),
+                                  content: Text('Эпоха: ${saved['era']}\nИстория: ${saved['historyType']}\nРежим: ${saved['game']}'
+                                ),
+                            actions: [
+                              TextButton(
+                                    child: Text('Продолжить'),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      Navigator.pushNamed(
+                                        context,
+                                        '/${saved['game']}',
+                                        arguments: {
+                                        'era': saved['era'],
+                                        'historyType': saved['historyType'],
+                                        'resume': true,
+                                        'index': saved['index'],
+                                      },
+                                    );
+                                  },
+                                  ),
+                              TextButton(
+                                child: Text('C начала'),
+                                onPressed: () async {
+                                  await prefs.remove('saved_game_date');
+                                  Navigator.pop(context);
+                                  Navigator.pushNamed(context, '/game_selector');
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              } else {
+                                Navigator.pushNamed(context, '/game_selector');
+                          }
+                            },
+                        style: buttonStyle().copyWith(minimumSize: WidgetStateProperty.all(Size.fromHeight(50))),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           mainAxisSize: MainAxisSize.max,
@@ -88,7 +132,28 @@ class MainScreen extends StatelessWidget {
                     child: SizedBox(
                       width: screenWidth * 0.6,
                       child: ElevatedButton(
-                        onPressed: () => Navigator.pushNamed(context, '/game_selector'),
+                        onPressed: () async {
+                          final prefs = await SharedPreferences.getInstance();
+                          final savedGame = prefs.getString('saved_game_data');
+
+                          if (savedGame != null) {
+                            final saved = jsonDecode(savedGame);
+                            Navigator.pushNamed(
+                              context,
+                              '/${saved['game']}',
+                              arguments: {
+                                'era': saved['era'],
+                                'historyType': saved['historyType'],
+                                'resume': true,
+                                'index': saved['index'],
+                              },
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Нет сохранённой игры')),
+                            );
+                          }
+                        },
                         style: buttonStyle().copyWith(
                           minimumSize: WidgetStateProperty.all(Size.fromHeight(50)),
                         ),

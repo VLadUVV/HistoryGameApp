@@ -12,4 +12,14 @@ class QuizQuestion {
     required this.era,
     required this.historyType,
 });
+
+  factory QuizQuestion.fromJson(Map<String, dynamic> json) {
+    return QuizQuestion(
+      question: json['question'],
+      answers: List<String>.from(json['answers']),
+      correctIndex: json['correctIndex'],
+      era: json['era'],
+      historyType: json['historyType'],
+    );
+  }
 }

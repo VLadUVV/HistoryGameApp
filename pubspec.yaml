@@ -66,6 +66,8 @@ flutter:
     - assets/images/cont.jpg
     - assets/audio/correct.mp3
     - assets/audio/wrong.mp3
+    - assets/data/emoji_questions.json
+    - assets/data/quiz_questions.json
 
 
 

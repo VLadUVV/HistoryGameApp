@@ -12,4 +12,14 @@ class EmojiQuestion {
     required this.era,
     required this.historyType,
   });
+
+  factory EmojiQuestion.fromJson(Map<String, dynamic> json) {
+    return EmojiQuestion(
+      emojis: json['emojis'],
+      options: List<String>.from(json['options']),
+      correctIndex: json['correctIndex'],
+      era: json['era'],
+      historyType: json['historyType'],
+    );
+  }
 }
