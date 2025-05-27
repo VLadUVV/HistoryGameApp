@@ -14,12 +14,33 @@ class _RegisterScreenState extends State<RegisterScreen>{
 
 
   Future<void> register() async {
+    final name = nameController.text.trim();
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+
+    if(name.isEmpty || email.isEmpty || password.isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Пожалуйста заполните все поля')
+            ),
+          );
+          return;
+    }
+
+    if(!emailRegex.hasMatch(email)){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Введите корректный email'))
+      );
+      return;
+    }
+
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('Id', DateTime.now().microsecondsSinceEpoch);
     await prefs.setString('name', nameController.text);
     await prefs.setString('email', emailController.text);
     await prefs.setString('password', passwordController.text);
-    Navigator.pushReplacementNamed(context, '/profile');
+    Navigator.pushReplacementNamed(context, '/main');
 }
   @override
   Widget build(BuildContext context){

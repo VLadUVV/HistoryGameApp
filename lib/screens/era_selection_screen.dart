@@ -9,15 +9,23 @@ class EraSelectionScreen extends StatefulWidget{
 class _EraSelectionScreenState extends State<EraSelectionScreen> {
   String? selectedEra;
   String? selectedHistory;
+  String? selectedGame;
 
   final List<String> eras = ['Античность', 'Средневековье', 'Новое время', 'Современность'];
   final List<String> histories = ['История России', 'Мировая история'];
 
+  @override
+  void didChangeDependencies(){
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context)?.settings.arguments as Map?;
+    selectedGame = args?['game'];
+  }
+
   void proceedToGames() {
-    if(selectedEra != null && selectedHistory !=null) {
+    if(selectedEra != null && selectedHistory != null && selectedGame != null) {
       Navigator.pushNamed(
           context,
-          '/quiz',
+          '/$selectedGame',
           arguments: {
             'era' : selectedEra,
             'historyType' : selectedHistory,
@@ -47,7 +55,8 @@ class _EraSelectionScreenState extends State<EraSelectionScreen> {
               ),
             ),
           ),
-          Padding(padding: EdgeInsets.all(24),
+          Padding(
+            padding: EdgeInsets.all(24),
             child: Column(
               children: [
                 Text('Выберите историческую эпоху:',
@@ -64,7 +73,8 @@ class _EraSelectionScreenState extends State<EraSelectionScreen> {
                 )),
                 SizedBox(height: 16),
                 Text('Выберите направление:',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
+                ),
                 ...histories.map((history) => RadioListTile<String>(
                       title: Text(history),
                       value: history,

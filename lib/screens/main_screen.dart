@@ -61,7 +61,7 @@ class MainScreen extends StatelessWidget {
                     child: SizedBox(
                       width: screenWidth * 0.6,
                       child: ElevatedButton(
-                        onPressed: () => Navigator.pushNamed(context, '/select_era'),
+                        onPressed: () => Navigator.pushNamed(context, '/game_selector'),
                         style: buttonStyle().copyWith(
                           minimumSize: WidgetStateProperty.all(Size.fromHeight(50)),
                         ),
@@ -88,7 +88,7 @@ class MainScreen extends StatelessWidget {
                     child: SizedBox(
                       width: screenWidth * 0.6,
                       child: ElevatedButton(
-                        onPressed: () => Navigator.pushNamed(context, '/select_era'),
+                        onPressed: () => Navigator.pushNamed(context, '/game_selector'),
                         style: buttonStyle().copyWith(
                           minimumSize: WidgetStateProperty.all(Size.fromHeight(50)),
                         ),
