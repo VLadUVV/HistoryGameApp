@@ -32,7 +32,23 @@ class _EmojiGuessScreenState extends State<EmojiGuessScreen> {
   Future<List<EmojiQuestion>> loadEmojiQuestions() async {
     final String data  = await rootBundle.loadString('assets/data/emoji_questions.json');
     final List<dynamic> jsonList = jsonDecode(data);
-    return jsonList.map((e) => EmojiQuestion.fromJson(e)).toList();
+
+    return jsonList.map((e) {
+      final originalOptions = List<String>.from(e['options']);
+      final correctAnswer = originalOptions[e['correctIndex']];
+
+      originalOptions.shuffle();
+
+      final newCorrectIndex = originalOptions.indexOf(correctAnswer);
+
+      return EmojiQuestion(
+          emojis: e['emojis'],
+          options: originalOptions,
+          correctIndex: newCorrectIndex,
+          era: e['era'],
+          historyType: e['historyType'],
+      );
+    }).toList();
   }
   void _loadQuestions() async {
     final args = ModalRoute.of(context)!.settings.arguments as Map?;

@@ -34,7 +34,23 @@ class _QuizScreenState extends State<QuizScreen> {
   Future<List<QuizQuestion>> loadQuizQuestions() async {
     final String data  = await rootBundle.loadString('assets/data/quiz_questions.json');
     final List<dynamic> jsonList = jsonDecode(data);
-    return jsonList.map((e) => QuizQuestion.fromJson(e)).toList();
+    return jsonList.map((e) {
+      final question = e['question'];
+      final originalAnswers = List<String>.from(e['answers']);
+      final correctAnswer = originalAnswers[e['correctIndex']];
+
+      originalAnswers.shuffle();
+
+      final newCorrectIndex = originalAnswers.indexOf(correctAnswer);
+
+      return QuizQuestion (
+        question: question,
+        answers:  originalAnswers,
+        correctIndex: newCorrectIndex,
+        era: e['era'],
+        historyType: e['historyType'],
+      );
+    }).toList();
   }
 
   Future<void> _initQuestions() async{
