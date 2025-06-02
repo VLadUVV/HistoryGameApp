@@ -96,7 +96,7 @@ class MainScreen extends StatelessWidget {
                               TextButton(
                                 child: Text('C начала'),
                                 onPressed: () async {
-                                  await prefs.remove('saved_game_date');
+                                  await prefs.remove('saved_game_data');
                                   Navigator.pop(context);
                                   Navigator.pushNamed(context, '/game_selector');
                                         },
