@@ -68,6 +68,8 @@ flutter:
     - assets/audio/wrong.mp3
     - assets/data/emoji_questions.json
     - assets/data/quiz_questions.json
+    - assets/images/level1_right.png
+    - assets/images/level1_left.png
 
 
 

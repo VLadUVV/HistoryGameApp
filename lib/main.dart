@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         '/edit': (context) => EditProfileScreen(),
         '/continue' : (context) => ContinueScreen(),
         '/game_selector' : (context) => GameSelectorScreen(),
-        '/game_10_differences' : (context) => Game10Differences(),
+        '/game_10_differences' : (context) => Game10DifferencesScreen(),
         '/quiz' : (context) => QuizScreen(),
         '/emoji_guess' : (context) => EmojiGuessScreen(),
         '/select_era': (context) => EraSelectionScreen(),

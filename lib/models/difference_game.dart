@@ -4,30 +4,38 @@ class Difference {
   bool found;
 
   Difference({required this.x, required this.y, this.found = false});
+
+  bool isTapped(double tapX, double tapY, double radius) {
+    final dx = tapX - x;
+    final dy = tapY - y;
+    return dx * dx + dy * dy <= radius * radius;
+  }
 }
 
-class DifferenceGame {
+class DifferenceGameModel {
   final String imageLeftPath;
   final String imageRightPath;
   final List<Difference> differences;
 
-  DifferenceGame ({
+  DifferenceGameModel({
     required this.imageLeftPath,
     required this.imageRightPath,
     required this.differences,
-});
-  int get foundCount => differences.where((d) => d.found).length;
+  });
 
-  bool checkTap(double tapX, double tapY, double tolerance){
-    for (var diff in differences) {
-      if (!diff.found &&
-          (tapX - diff.x).abs() <= tolerance &&
-          (tapY - diff.y).abs() <= tolerance) {
+  int get foundCount =>
+      differences
+          .where((d) => d.found)
+          .length;
+
+  bool get isGameComplete => foundCount == differences.length;
+
+  void checkTap(double tapX, double tapY, double radius) {
+    for(var diff in differences) {
+      if(!diff.found && diff.isTapped(tapX, tapY, radius)) {
         diff.found = true;
-        return true;
+        break;
       }
     }
-    return false;
-    }
-      bool get isGameComplete => foundCount == differences.length;
   }
+}
